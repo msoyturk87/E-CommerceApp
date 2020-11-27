@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <div th:replace="/fragments/head :: header"></div>
+
+</head>
+<body>
+
+
+<div class="dashboard-main-wrapper">
+
+    <div th:replace="/fragments/navbar :: navbar"></div>
+    <div class="row">Test </div>
+    <div class="container d-flex justify-content-center">
+
+
+
+        <table class="table table-striped ">
+            <thead>
+            <tr>
+                <th scope="col ">Category ID</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Action</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="category : ${categories}">
+                <th scope="row" th:text="${category.id}"></th>
+                <td th:text="${category.name}"></td>
+
+                <td class="actions">
+                    <a href=""><button type="button" class="btn  btn-sm text-info">More</button></a>
+                    <a th:href="@{/category/delete/{id}(id=${category.id})}"  class="delete-row"><button type="button" class="btn  btn-sm text-info">Delete</button></a>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <div th:replace="/fragments/footer :: footer"></div>
+
+</div>
+
+<div th:replace="/fragments/javascript :: js"></div>
+
+</body>
+
+</html>
