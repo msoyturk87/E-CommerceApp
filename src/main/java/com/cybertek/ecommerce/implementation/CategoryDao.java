@@ -92,7 +92,7 @@ public class CategoryDao {
         CategoryDTO foundedCategoryDTO = readById(id);
 
         if (foundedCategoryDTO == null)  {
-            throw new Exception("This category does not  exist");
+            throw new Exception("This category does not  exist anymore ");
         }
         else {
 
