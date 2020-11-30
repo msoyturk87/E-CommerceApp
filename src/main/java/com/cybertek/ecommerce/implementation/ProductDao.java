@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class ProductDao extends AbstractDao<ProductDTO,Integer> {
+public class ProductDao {
     @Autowired
     private CategoryDao categoryDao;
     /**
@@ -41,7 +41,7 @@ public class ProductDao extends AbstractDao<ProductDTO,Integer> {
     }
 
     /**
-     *
+     * it works
      * @return list of ProductDTO {@link List<ProductDTO>}
      */
     public List<ProductDTO> readAll() {
@@ -51,11 +51,11 @@ public class ProductDao extends AbstractDao<ProductDTO,Integer> {
 
 
     /**
+     * add exception message                  do it 
      * Read ProductDTO by id.
      * @param id specific id to be readed.
      * @return specific ProductDTO {@link ProductDTO}
      */
-    @Override
     public void update(ProductDTO productDTO, Integer id) {
         ProductDTO foundedProductDTO = readById(id);
 
@@ -63,46 +63,47 @@ public class ProductDao extends AbstractDao<ProductDTO,Integer> {
             System.out.println(("This product does not exist!"));
             //exception
         }
-        else {
+
 
             foundedProductDTO.setName(productDTO.getName());
             foundedProductDTO.setDescription(productDTO.getDescription());
-        }
+
     }
 
     /**
+     * it works
      * Delete ProductDTO
      * @param id specific id to be deleted.
      */
-    @Override
+
     public void delete(Integer id) {
         products.removeIf(x -> x.getId().equals(id));
     }
     /**
+     * it works
      * Create new ProductDTO
      * @param productDTO ProductDTO to be created.
      */
-    @Override
     public void create(ProductDTO productDTO) {
-        /*List<ProductDTO> sortedCategories = products.stream()
+        List<ProductDTO> sortedProducts = products.stream()
                 .sorted(Comparator.comparing(ProductDTO::getId))
                 .collect(Collectors.toList());
 
-        Optional<ProductDTO> lastCategory = sortedCategories.stream().reduce((a, b) -> b);
+        Optional<ProductDTO> lastCategory = sortedProducts.stream().reduce((a, b) -> b);
 
         int lastId = lastCategory.isPresent() ? lastCategory.get().getId() : 0;
 
-        productDTO.setId(lastId + 1);*/
+        productDTO.setId(lastId + 1);
         products.add(productDTO);
     }
 
 
     /**
+     * it works
      * Read ProductDTO by id.
      * @param id specific id to be readed.
      * @return specific ProductDTO {@link ProductDTO}
      */
-    @Override
     public ProductDTO readById(Integer id) {
         return products.stream()
                 .filter(product -> product.getId().equals(id))

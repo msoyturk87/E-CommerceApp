@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
+
 @Controller
 @RequestMapping("/product")
 public class ProductController {
@@ -55,6 +57,19 @@ public class ProductController {
         model.addAttribute("product",productDao.readById(id));
         model.addAttribute("categories",categoryDao.readAll());
         return "/product/detail";
+    }
+    @PostMapping("/edit/{id}")
+    public String updateForm(@PathVariable("id") Integer id, Model model) {
+
+        model.addAttribute("product",productDao.readById(id));
+        model.addAttribute("categories",categoryDao.readAll());
+        return "/product/update";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateProducts(@PathVariable("id") Integer id,@ModelAttribute("product") ProductDTO productDTO,Model model) {
+            productDao.update(productDTO,id);
+        return "redirect:/product/products";
     }
 
 

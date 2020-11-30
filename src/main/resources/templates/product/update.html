@@ -30,12 +30,12 @@
                                 <div class="panel-body">
 
                                     <!-- ------------------------FORM START----------------------------- -->
-                                    <form class="needs-validation" novalidate th:action="@{/product/edit/{id}(id=${product.id})}"
+                                    <form class="needs-validation" novalidate th:action="@{/product/update/{id}(id=${product.id})}"
                                           method="post" th:object="${product}">
                                         <div class="form-group col">
                                             <label for="catName">Name</label>
                                             <input type="text" class="form-control" id="catName" th:field="*{name}"
-                                                   placeholder="Enter Product Name" readonly required>
+                                                   placeholder="Enter Product Name"  required>
                                             <div class="invalid-feedback">
                                                 Please enter Category Name.
                                             </div>
@@ -45,7 +45,7 @@
                                         <div class="form-group col">
                                             <label for="desc">Description</label>
                                             <textarea class="form-control" id="desc" rows="3" th:field="*{description}"
-                                                      readonly required></textarea>
+                                                       required></textarea>
                                             <div class="invalid-feedback">
                                                 Please enter Description.
                                             </div>
@@ -53,15 +53,18 @@
 
                                         <div class="form-group col">
                                             <label>Choose a Category</label>
-                                            <input type="text" class="form-control" id="category" th:field="*{categoryDTO.name}"
-                                                   placeholder="Enter Product Name" readonly required>
+                                            <select th:field="*{categoryId}" class="custom-select" required="required">
+                                                <option th:value=" ''" th:text="Select"></option>
+                                                <option th:each="category : ${categories}" th:value="${category.id}"
+                                                        th:text="${category.name}"></option>
+                                            </select>
                                         </div>
 
                                         <div class="form-row group col">
                                             <div class="col">
 
                                                 <input type="text" th:field="*{price}" class="form-control"
-                                                       placeholder="Enter Price" readonly required>
+                                                       placeholder="Enter Price"  required>
                                                 <div class="invalid-feedback">
                                                     Please enter Price.
                                                 </div>
@@ -69,7 +72,7 @@
                                             <div class="col">
 
                                                 <input type="text" th:field="*{quantity}" class="form-control"
-                                                       placeholder="Enter Quantity" readonly required>
+                                                       placeholder="Enter Quantity"  required>
                                                 <div class="invalid-feedback">
                                                     Please enter Quantity.
                                                 </div>
@@ -78,7 +81,7 @@
                                         <br>
                                         <div class="form-group col">
                                             <p class="text-right">
-                                                <button type="submit" class="btn btn-success">Edit</button>
+                                                <button type="submit" class="btn btn-success">Update</button>
                                             </p>
                                         </div>
 

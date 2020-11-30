@@ -1,6 +1,5 @@
 package com.cybertek.ecommerce.dto;
 
-import com.cybertek.ecommerce.entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

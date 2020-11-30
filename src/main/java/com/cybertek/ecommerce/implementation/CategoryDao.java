@@ -1,7 +1,6 @@
 package com.cybertek.ecommerce.implementation;
 
 import com.cybertek.ecommerce.dto.CategoryDTO;
-import com.cybertek.ecommerce.entity.Category;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -38,14 +37,16 @@ public class CategoryDao {
     }
 
     /**
+     * it works
      * Read all categories.
-     * @return list of categories {@link List<Category>}
+     * @return list of categories {@link List<CategoryDTO>}
      */
     public List<CategoryDTO> readAll() {
         return categories;
     }
 
     /**
+     * it works
      * Read category by id.
      * @param id specific id to be readed.
      * @return specific Category {@link CategoryDTO}
@@ -58,6 +59,7 @@ public class CategoryDao {
     }
 
     /**
+     * it works                         control it
      * Create new category
      * @param categoryDTO CategoryDTO to be created.
      */
@@ -74,6 +76,8 @@ public class CategoryDao {
     }
 
     /**
+     *
+     * add exception                do it
      * Update an existing CategoryDTO.
      * @param categoryDTO CategoryDTO to be updated
      * @param id categoryDTO id
@@ -94,6 +98,8 @@ public class CategoryDao {
     }
 
     /**
+     *
+     * add control mechanism for category delete            do it
      * Delete category
      * @param id specific id to be deleted.
      */

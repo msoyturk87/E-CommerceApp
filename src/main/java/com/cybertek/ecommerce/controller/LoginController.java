@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LoginController {
-	
+
+
+	// improve views maybe pictures
 	@RequestMapping()
 	public String login(){
 		return "login";
