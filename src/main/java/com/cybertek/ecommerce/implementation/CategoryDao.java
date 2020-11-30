@@ -91,7 +91,7 @@ public class CategoryDao {
     public void update(CategoryDTO categoryDTO, Integer id) throws Exception {
         CategoryDTO foundedCategoryDTO = readById(id);
 
-        if (foundedCategoryDTO == null) {
+        if (foundedCategoryDTO == null)  {
             throw new Exception("This category does not  exist");
         }
         else {
