@@ -82,6 +82,8 @@
                                         <div class="form-group col">
                                             <p class="text-right">
                                                 <button type="submit" class="btn btn-success">Update</button>
+                                                <a th:href="@{/product/delete/{id}(id=${product.id})}"  class="delete-row"><button type="button" class="btn btn-danger">Delete</button></a>
+
                                             </p>
                                         </div>
 

@@ -1,8 +1,12 @@
 package com.cybertek.ecommerce.implementation;
 
 import com.cybertek.ecommerce.dto.CategoryDTO;
+import com.cybertek.ecommerce.dto.ProductDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -11,7 +15,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class CategoryDao {
-
+    @Autowired
+    private ProductDao productDao;
     /**
      * list of categories, simulate database.
      */
@@ -83,12 +88,11 @@ public class CategoryDao {
      * @param id categoryDTO id
      * @throws Exception exception if category does not exist.
      */
-    public void update(CategoryDTO categoryDTO, Integer id) {
+    public void update(CategoryDTO categoryDTO, Integer id) throws Exception {
         CategoryDTO foundedCategoryDTO = readById(id);
 
         if (foundedCategoryDTO == null) {
-            System.out.println(("This category does not exist!"));
-            // exception
+            throw new Exception("This category does not  exist");
         }
         else {
 
@@ -103,11 +107,40 @@ public class CategoryDao {
      * Delete category
      * @param id specific id to be deleted.
      */
-    public void delete(Integer id) {
+    public void delete(Integer id) throws Exception {
+        Optional<ProductDTO> productDTOs = productDao.readAll().stream()
+                .filter(x -> x.getCategoryDTO().getId().equals(id))
+                .reduce((a, b) -> b);
+
+        int existOrNot = productDTOs.isPresent() ? productDTOs.get().getId() : 0;
+
+        if(existOrNot>0) {
+
+            throw new Exception("This category has products");
+
+        }
 
         categories.removeIf(x -> x.getId().equals(id));
-        // Write your code to delete the category in a list.
-        // if statemenet about product
+
+      /*  boolean flag=false;
+        List<ProductDTO> productDTOS = productDao.readAll();
+        for (ProductDTO productDTO : productDTOS) {
+            if(productDTO.getCategoryDTO().getId()==id){
+                flag=true;
+                break;
+
+            }
+
+        }
+        if(flag)
+            System.out.println("Don't do that");
+
+        else
+           categories.removeIf(x -> x.getId().equals(id));*/
+
+
+
+
     }
 
 }

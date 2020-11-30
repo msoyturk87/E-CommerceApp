@@ -56,13 +56,12 @@ public class ProductDao {
      * @param id specific id to be readed.
      * @return specific ProductDTO {@link ProductDTO}
      */
-    public void update(ProductDTO productDTO, Integer id) {
+    public void update(ProductDTO productDTO, Integer id) throws Exception {
         ProductDTO foundedProductDTO = readById(id);
 
         if (foundedProductDTO == null) {
-            System.out.println(("This product does not exist!"));
-            //exception
-        }
+            throw new Exception("This product does not  exist");
+                    }
 
 
             foundedProductDTO.setName(productDTO.getName());

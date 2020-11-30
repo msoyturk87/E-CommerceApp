@@ -67,8 +67,14 @@ public class ProductController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateProducts(@PathVariable("id") Integer id,@ModelAttribute("product") ProductDTO productDTO,Model model) {
+    public String updateProducts(@PathVariable("id") Integer id,@ModelAttribute("product") ProductDTO productDTO,Model model) throws Exception {
             productDao.update(productDTO,id);
+        return "redirect:/product/products";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteProducts(@PathVariable("id") Integer id) {
+        productDao.delete(id);
         return "redirect:/product/products";
     }
 

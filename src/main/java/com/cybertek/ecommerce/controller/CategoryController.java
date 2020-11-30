@@ -51,10 +51,11 @@ public class CategoryController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteCategory(@PathVariable("id") Integer id) {
+    public String deleteCategory(@PathVariable("id") Integer id) throws Exception {
         categoryDao.delete(id);
         return "redirect:/category/categories";
     }
+
 
     @GetMapping("/detail/{id}")
     public String detailCategory(@PathVariable("id") Integer id, Model model) {
