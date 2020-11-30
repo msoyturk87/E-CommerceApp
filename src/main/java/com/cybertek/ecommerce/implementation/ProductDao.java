@@ -2,11 +2,11 @@ package com.cybertek.ecommerce.implementation;
 
 import com.cybertek.ecommerce.dto.CategoryDTO;
 import com.cybertek.ecommerce.dto.ProductDTO;
-import com.cybertek.ecommerce.service.CategoryService;
-import com.cybertek.ecommerce.service.ProductService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,18 +15,22 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class ProductDao extends AbstractDao<ProductDTO,Integer>  implements ProductService {
-
-
+public class ProductDao extends AbstractDao<ProductDTO,Integer> {
+    @Autowired
+    private CategoryDao categoryDao;
     /**
      * List of ProductDTO for simulating DB
      */
     public static List<ProductDTO> products = new ArrayList<>();
-    static {
-        products.add(new ProductDTO(1, "Phones", BigDecimal.valueOf(1000l),5,"Apple",new CategoryDao().readById(2)));
-        products.add(new ProductDTO(2, "Tshirt", BigDecimal.valueOf(10l),4,"Zara",new CategoryDao().readById(4)));
-        products.add(new ProductDTO(3, "Mouse", BigDecimal.valueOf(1l),2,"Logitech",new CategoryDao().readById(2)));
-        products.add(new ProductDTO(1, "Parfume", BigDecimal.valueOf(100l),2,"DKNY",new CategoryDao().readById(3)));
+
+
+    @PostConstruct
+    public void addData(){
+
+        products.add(new ProductDTO(1, "Phones", BigDecimal.valueOf(1000l),5,"Apple",categoryDao.readById(2)));
+        products.add(new ProductDTO(2, "Tshirt", BigDecimal.valueOf(10l),4,"Zara",categoryDao.readById(4)));
+        products.add(new ProductDTO(3, "Mouse", BigDecimal.valueOf(1l),2,"Logitech",categoryDao.readById(2)));
+        products.add(new ProductDTO(4, "Parfume", BigDecimal.valueOf(100l),2,"DKNY",categoryDao.readById(3)));
 
     }
 
@@ -40,7 +44,6 @@ public class ProductDao extends AbstractDao<ProductDTO,Integer>  implements Prod
      *
      * @return list of ProductDTO {@link List<ProductDTO>}
      */
-    @Override
     public List<ProductDTO> readAll() {
         return products;
     }
@@ -53,16 +56,27 @@ public class ProductDao extends AbstractDao<ProductDTO,Integer>  implements Prod
      * @return specific ProductDTO {@link ProductDTO}
      */
     @Override
-    public void update(ProductDTO object, Integer id) {
+    public void update(ProductDTO productDTO, Integer id) {
+        ProductDTO foundedProductDTO = readById(id);
 
+        if (foundedProductDTO == null) {
+            System.out.println(("This product does not exist!"));
+            //exception
+        }
+        else {
+
+            foundedProductDTO.setName(productDTO.getName());
+            foundedProductDTO.setDescription(productDTO.getDescription());
+        }
     }
+
     /**
      * Delete ProductDTO
      * @param id specific id to be deleted.
      */
     @Override
     public void delete(Integer id) {
-
+        products.removeIf(x -> x.getId().equals(id));
     }
     /**
      * Create new ProductDTO

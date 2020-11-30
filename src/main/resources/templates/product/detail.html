@@ -53,10 +53,9 @@
 
                                         <div class="form-group col">
                                             <label>Choose a Category</label>
-                                            <select th:field="*{categoryId}" class="custom-select" required="required">
-                                                <option th:value=" ''" th:text="Select"></option>
+                                            <select th:name="*{categoryDTO}" class="custom-select"  readonly required="required">
                                                 <option th:each="category : ${categories}" th:value="${category.id}"
-                                                        th:text="${category.name}"></option>
+                                                         th:text="${category.categoryDTO.name}"></option>
                                             </select>
                                         </div>
 

@@ -23,6 +23,8 @@
             <tr>
                 <th scope="col ">Category ID</th>
                 <th scope="col">Category Name</th>
+                <th scope="col">Category Desc</th>
+
                 <th scope="col">Action</th>
 
             </tr>
@@ -31,9 +33,11 @@
             <tr th:each="category : ${categories}">
                 <th scope="row" th:text="${category.id}"></th>
                 <td th:text="${category.name}"></td>
+                <td th:text="${category.description}"></td>
+
 
                 <td class="actions">
-                    <a href=""><button type="button" class="btn  btn-sm text-info">More</button></a>
+                    <a th:href="@{/category/detail/{id}(id=${category.id})}"  ><button type="button" class="btn  btn-sm text-info">More</button></a>
                     <a th:href="@{/category/delete/{id}(id=${category.id})}"  class="delete-row"><button type="button" class="btn  btn-sm text-info">Delete</button></a>
                 </td>
             </tr>

@@ -2,7 +2,6 @@ package com.cybertek.ecommerce.implementation;
 
 import com.cybertek.ecommerce.dto.CategoryDTO;
 import com.cybertek.ecommerce.entity.Category;
-import com.cybertek.ecommerce.service.CategoryService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class CategoryDao extends AbstractDao<CategoryDTO,Integer>  implements CategoryService{
+public class CategoryDao {
 
     /**
      * list of categories, simulate database.
@@ -85,10 +84,13 @@ public class CategoryDao extends AbstractDao<CategoryDTO,Integer>  implements Ca
 
         if (foundedCategoryDTO == null) {
             System.out.println(("This category does not exist!"));
+            // exception
         }
+        else {
 
-        foundedCategoryDTO.setName(categoryDTO.getName());
-        foundedCategoryDTO.setName(categoryDTO.getDescription());
+            foundedCategoryDTO.setName(categoryDTO.getName());
+            foundedCategoryDTO.setDescription(categoryDTO.getDescription());
+        }
     }
 
     /**
@@ -99,6 +101,7 @@ public class CategoryDao extends AbstractDao<CategoryDTO,Integer>  implements Ca
 
         categories.removeIf(x -> x.getId().equals(id));
         // Write your code to delete the category in a list.
+        // if statemenet about product
     }
 
 }

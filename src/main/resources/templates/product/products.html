@@ -31,8 +31,6 @@
 
                 <tr th:each="product : ${products}">
                     <td >
-
-
                     <!--Card-->
                     <div class="card card-cascade card-ecommerce narrower  col-xl-4" >
 
@@ -46,7 +44,7 @@
                         <!--Card content-->
                         <div class="card-body card-body-cascade text-center">
                             <!--Category & Title-->
-                            <h4 class="card-title"><strong><a th:href="@{/product/products}"  th:text="${product.name}"></a></strong></h4>
+                            <h4 class="card-title"><strong><a th:href="@{/product/detail/{id}(id=${product.id})}"  th:text="${product.name}"></a></strong></h4>
 
 
 
@@ -57,7 +55,7 @@
                                 <label class="float-right" th:text="${product.price}+ ' $' "></label>
 
                             </div>
-
+  
                         </div>
                         <!--/.Card content-->
 
