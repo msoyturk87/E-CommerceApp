@@ -64,7 +64,7 @@ public class CategoryController {
     }
 
     @PostMapping("/detail/{id}")
-    public String updateCategory(@ModelAttribute("category") CategoryDTO category,@PathVariable("id") Integer id,Model model) {
+    public String updateCategory(@ModelAttribute("category") CategoryDTO category,@PathVariable("id") Integer id,Model model) throws Exception {
         categoryDao.update(category,id);
 
 

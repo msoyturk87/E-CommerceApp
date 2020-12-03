@@ -94,11 +94,11 @@ public class CategoryDao {
         if (foundedCategoryDTO == null)  {
             throw new Exception("This category does not  exist ");
         }
-        else {
+
 
             foundedCategoryDTO.setName(categoryDTO.getName());
             foundedCategoryDTO.setDescription(categoryDTO.getDescription());
-        }
+
     }
 
     /**
@@ -122,21 +122,7 @@ public class CategoryDao {
 
         categories.removeIf(x -> x.getId().equals(id));
 
-      /*  boolean flag=false;
-        List<ProductDTO> productDTOS = productDao.readAll();
-        for (ProductDTO productDTO : productDTOS) {
-            if(productDTO.getCategoryDTO().getId()==id){
-                flag=true;
-                break;
 
-            }
-
-        }
-        if(flag)
-            System.out.println("Don't do that");
-
-        else
-           categories.removeIf(x -> x.getId().equals(id));*/
 
 
 
