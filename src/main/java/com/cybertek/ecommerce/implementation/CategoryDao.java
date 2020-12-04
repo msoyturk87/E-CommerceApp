@@ -63,12 +63,26 @@ public class CategoryDao {
                 .orElse(null);
     }
 
+    public CategoryDTO readByName(String name) {
+        return categories.stream()
+                .filter(category -> category.getName().equals(name))
+                .findFirst()
+                .orElse(null);
+    }
+
     /**
      * it works                         control it
      * Create new category
      * @param categoryDTO CategoryDTO to be created.
      */
-    public void create(CategoryDTO categoryDTO) {
+    public void create(CategoryDTO categoryDTO) throws Exception {
+
+        CategoryDTO foundedCategoryDTO = readByName(categoryDTO.getName());
+
+        if (foundedCategoryDTO != null)  {
+            throw new Exception("This category already created ");
+        }
+
         List<CategoryDTO> sortedCategories = categories.stream()
                 .sorted(Comparator.comparing(CategoryDTO::getId))
                 .collect(Collectors.toList());

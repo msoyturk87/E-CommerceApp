@@ -44,7 +44,7 @@ public class CategoryController {
     }
 
     @PostMapping("/categories")
-    public String addCategory(@ModelAttribute("category") CategoryDTO categoryDTO) {
+    public String addCategory(@ModelAttribute("category") CategoryDTO categoryDTO) throws Exception {
         categoryDao.create(categoryDTO);
 
         return "redirect:/category/categories";
